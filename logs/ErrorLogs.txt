@@ -1,0 +1,12 @@
+2023-05-11 16:56
+La ruta proporcionada es inválida
+Ruta.solicitarRutaEntrada(Ruta.java:45)
+Ruta.rutaEntrada(Ruta.java:16)
+App.main(App.java:28)
+
+2023-05-11 17:01
+La ruta proporcionada es inválida
+Ruta.solicitarRutaEntrada(Ruta.java:42)
+Ruta.rutaEntrada(Ruta.java:16)
+App.main(App.java:28)
+
