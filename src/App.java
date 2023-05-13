@@ -25,16 +25,17 @@ public class App {
 
                 case 1:
 
-                    Ruta.rutaEntrada();
                     break;
 
                 case 2:
 
-                    Ruta.rutaSalida();
+                    LecturaEscrituraStreams.lecturaEscrituraCaracter();
+                    // Pruebas2.lecturaEscrituraCaracter();
                     break;
 
                 case 3:
 
+                    LecturaEscrituraStreams.lecturaEscrituraBuffer();
                     break;
 
                 case 4:
