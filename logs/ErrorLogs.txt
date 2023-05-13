@@ -1,12 +1,7 @@
-2023-05-11 16:56
+2023-05-13 18:22
 La ruta proporcionada es inválida
-Ruta.solicitarRutaEntrada(Ruta.java:45)
-Ruta.rutaEntrada(Ruta.java:16)
-App.main(App.java:28)
-
-2023-05-11 17:01
-La ruta proporcionada es inválida
-Ruta.solicitarRutaEntrada(Ruta.java:42)
-Ruta.rutaEntrada(Ruta.java:16)
-App.main(App.java:28)
+Ruta.solicitarRutaSalida(Ruta.java:90)
+Ruta.rutaSalida(Ruta.java:57)
+LecturaEscrituraStreams.lecturaEscrituraCaracter(LecturaEscrituraStreams.java:130)
+App.main(App.java:32)
 
