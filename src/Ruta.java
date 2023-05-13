@@ -73,18 +73,24 @@ public class Ruta {
     public static String solicitarRutaSalida() throws RutaInvalida {
     
         String rutaSalida = "";
+        String nombreArchivo = "";
     
         System.out.print("Introduce la ruta de salida del fichero: ");
         rutaSalida = sc.nextLine();
+
+        System.out.print("Introduce el nombre que tendrá el fichero: ");
+        nombreArchivo = sc.nextLine();
+
+        String rutaCompleta = rutaSalida + nombreArchivo;
     
-        File archivo = new File(rutaSalida);
+        File archivo = new File(rutaCompleta);
     
-        if (!archivo.exists()) {
+        if (archivo.exists()) {
             
             throw new RutaInvalida("La ruta proporcionada es inválida");
         }
     
         System.out.println("La ruta de salida es válida");
-        return rutaSalida;
+        return rutaCompleta;
     }   
 }
