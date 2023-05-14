@@ -30,11 +30,10 @@ public class App {
                 case 2:
 
                     LecturaEscrituraStreams.lecturaEscrituraCaracter();
-                    // Pruebas2.lecturaEscrituraCaracter();
                     break;
 
                 case 3:
-
+                
                     LecturaEscrituraStreams.lecturaEscrituraBuffer();
                     break;
 
