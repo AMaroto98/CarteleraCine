@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,14 +8,20 @@ public class LecturaEscrituraStreams {
 
     static StringBuilder cartelera = new StringBuilder();
 
-    public static void lecturaEscrituraByte() {}
+    public static void lecturaEscrituraByte() {
+
+
+    }
 
     public static void lecturaEscrituraCaracter() {
 
-        try (FileReader entrada = new FileReader(Ruta.rutaEntrada())) {
+        // Limpio la cartelera para reutilzarla
+        cartelera.setLength(0);
 
-            // Para limpiar la cartelera para reutilzarla
-            cartelera.setLength(0);
+        // Añado título de la cartelera
+        cartelera.append(" Cartelera de Cine CIFFBMOLL:" + "\n" + "\n");
+
+        try (FileReader entrada = new FileReader(Ruta.rutaEntrada())) {
 
             int contador = 0;
             int contadorAlmohadilla = 0;
@@ -25,8 +32,6 @@ public class LecturaEscrituraStreams {
             boolean sinopsis = false;
             boolean reparto = false;
             boolean sesion = false;
-
-            cartelera.append("Cartelera de Cine CIFFBMOLL" + "\n" + "\n");
 
             while (contador != -1) {
 
@@ -123,6 +128,7 @@ public class LecturaEscrituraStreams {
             
         } catch (IOException e) {
 
+            RutaInvalida.imprimirErrorLogs(e);
             System.out.println("Error LecturaEscrituraCaracter: " + e.getMessage());
         }
 
@@ -137,6 +143,7 @@ public class LecturaEscrituraStreams {
             
         } catch (IOException e) {
 
+            RutaInvalida.imprimirErrorLogs(e);
             System.out.println("Error LecturaEscrituraCaracter: " + e.getMessage());
         }
 
@@ -144,35 +151,69 @@ public class LecturaEscrituraStreams {
 
     public static void lecturaEscrituraBuffer() {
 
+        // Limpio la cartelera para reutilzarla
+        cartelera.setLength(0);
+
+        // Añado título de la cartelera
+        cartelera.append(" Cartelera de Cine CIFFBMOLL:" + "\n" + "\n");
+
         // Lectura
-        try (BufferedReader entrada = new BufferedReader(new FileReader("file.txt"))) {
+        try (BufferedReader entrada = new BufferedReader(new FileReader(Ruta.rutaEntrada()))) {
 
             String linea;
 
             while ((linea = entrada.readLine()) != null) {
-                String[] partes = linea.split("#");
 
-                // Extraer la información de la película
-                String titulo = partes[0];
-                String año = partes[1];
-                String director = partes[2];
-                String duracion = partes[3];
-                String sinopsis = partes[4];
-                String reparto = partes[5];
-                String sesion = partes[6];
+                // Hago un split para tener las películas por separado
+                String[] peliculas = linea.split("\\{");
 
-                // Imprimir la información en el formato deseado
-                System.out.println("-----" + titulo + "-----");
-                System.out.println("Año: " + año);
-                System.out.println("Director: " + director);
-                System.out.println("Duración: " + duracion + " minutos");
-                System.out.println("Sinopsis: " + sinopsis);
-                System.out.println("Reparto: " + reparto);
-                System.out.println("Sesión: " + sesion + " horas \n");
+                // Recorro la array de peliculas
+                for (String informacion : peliculas) {
+
+                    // De cada película hago splits por # y setteo las líneas en las variables
+                    String[] partes = informacion.split("#");
+
+                    String titulo = partes[0];
+                    String año = partes[1];
+                    String director = partes[2];
+                    String duracion = partes[3];
+                    String sinopsis = partes[4];
+                    String reparto = partes[5];
+                    String sesion = partes[6];
+                    
+                    // Añado las variables a la cartelera
+                    cartelera.append("-----" + titulo + "-----" + "\n" + "\n");
+                    cartelera.append("Año: " + año + "\n" + "\n");
+                    cartelera.append("Director: " + director + "\n" + "\n");
+                    cartelera.append("Duración: " + duracion + " minutos" + "\n" + "\n");
+                    cartelera.append("Sinopsis: " + sinopsis + "\n" + "\n");
+                    cartelera.append("Reparto: " + reparto + "\n" + "\n");
+                    cartelera.append("Sesión: " + sesion + " horas" + "\n" + "\n");
+
+                    // Limpio las variables que ya he añadido para poder reutilizarlas con las siguiente películas
+                    for (int i = 0; i < partes.length; i++) {
+
+                        partes[i] = "";
+                        
+                    } 
+                }
             }
 
         } catch (IOException e) {
+
+            RutaInvalida.imprimirErrorLogs(e);
             System.out.println("Error: " + e.getMessage());
+        }
+
+        // Escribo la cartelera en el archivo de salida
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(Ruta.rutaSalida()))) {
+
+            bw.write(cartelera.toString());
+
+        } catch (IOException e) {
+
+            RutaInvalida.imprimirErrorLogs(e);
+            System.out.println("Error al escribir en el archivo: " + e.getMessage());
         }
     }
 }
