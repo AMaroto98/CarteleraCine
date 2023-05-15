@@ -86,7 +86,8 @@ public class App {
                         switch (opcionAnidada) {
 
                             case 1:
-                                
+                            
+                                LecturaEscrituraStreams.leerLineaEscribirObj();
                                 break;
                             
                             case 2:
