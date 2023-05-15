@@ -1,6 +1,7 @@
 public class Pelicula {
 
     private String titulo;
+    private String año;
     private String director;
     private String duracion;
     private String sinopsis;
@@ -10,8 +11,9 @@ public class Pelicula {
     public Pelicula() {
     }
 
-    public Pelicula(String titulo, String director, String duracion, String sinopsis, String reparto, String sesion) {
+    public Pelicula(String titulo, String año, String director, String duracion, String sinopsis, String reparto, String sesion) {
         this.titulo = titulo;
+        this.año = año;
         this.director = director;
         this.duracion = duracion;
         this.sinopsis = sinopsis;
@@ -25,6 +27,14 @@ public class Pelicula {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public String getAño() {
+        return año;
+    }
+
+    public void setAño(String año) {
+        this.año = año;
     }
 
     public String getDirector() {
@@ -69,15 +79,7 @@ public class Pelicula {
 
     @Override
     public String toString() {
-        return "------ " + titulo + " ------" + "\n" +
-                "Director: " + director + "\n" +
-                "Duración:" + duracion + "\n" +
-                "Sinopsis: " + sinopsis + "\n" +
-                "Reparto: " + reparto + "\n" +
-                "Sesión: " + sesion;
+        return "Pelicula Titulo: " + titulo + ", Año: " + año + ", Director: " + director + ", Duración:" + duracion
+                + ", Sinopsis: " + sinopsis + ", Reparto: " + reparto + ", Sesión: " + sesion;
     }
-
-    
-
-
 }
