@@ -255,4 +255,59 @@ public class LecturaEscrituraStreams {
         cartelera.append("Sesión: " + sesion + " horas" + "\n" + "\n");
 
     }
+
+    public static void leerLineaEscribirObj() {
+
+        try {
+
+            BufferedReader entrada = new BufferedReader(new FileReader(Ruta.rutaEntrada()));
+            FileOutputStream salida = new FileOutputStream(Ruta.rutaSalida());
+            ObjectOutputStream peliculaActual = new ObjectOutputStream(salida);
+
+            String linea;
+
+            while ((linea = entrada.readLine()) != null) {
+
+                // Hago un split para tener las películas por separado
+                String[] peliculas = linea.split("\\{");
+
+                // Recorro la array de peliculas
+                for (String informacion : peliculas) {
+
+                    // De cada película hago splits por # y setteo las líneas en las variables
+                    String[] partes = informacion.split("#");
+
+                    String titulo = partes[0];
+                    String año = partes[1];
+                    String director = partes[2];
+                    String duracion = partes[3];
+                    String sinopsis = partes[4];
+                    String reparto = partes[5];
+                    String sesion = partes[6];
+                    
+                    Pelicula pelicula = new Pelicula(titulo, año, director, duracion, sinopsis, reparto, sesion);
+                    peliculaActual.writeObject(pelicula);
+
+                    // Limpio las variables que ya he añadido para poder reutilizarlas con las siguiente películas
+                    for (int i = 0; i < partes.length; i++) {
+
+                        partes[i] = "";
+                        
+                    } 
+                }
+            }
+
+            entrada.close();
+            salida.close();
+            peliculaActual.close();
+            
+        } catch (Exception e) {
+
+            RutaInvalida.imprimirErrorLogs(e);
+        }
+
+
+
+
+    }
 }
