@@ -63,9 +63,9 @@ public class App {
                         ClearTerminal.clearTerminal();
 
                         System.out.println("------------------ Menú ----------------");
-                        System.out.println("1. Lectura y escritua con objetos");
-                        System.out.println("2. Lectura y escritura de objetos");
-                        System.out.println("3. Lectura y escritura por consola");
+                        System.out.println("1. Lectura txt y escritua de objeto");
+                        System.out.println("2. Lectura objeto y escritura de objeto");
+                        System.out.println("3. Lectura objeto y escritura por consola");
                         System.out.println("4. Atrás");
                         System.out.println("------------------------------------------");
 
@@ -87,15 +87,18 @@ public class App {
 
                             case 1:
                             
-                                LecturaEscrituraStreams.leerLineaEscribirObj();
+                                LecturaEscrituraStreams.leerLineaEscribirObjeto();
                                 break;
                             
                             case 2:
 
+                                LecturaEscrituraStreams.leerObjEscribirObjeto();
                                 break;
 
                             case 3:
-                                
+
+                                LecturaEscrituraStreams.leerObjetoEscribirConsola();
+                                Sleep.pause(5000);
                                 break;
 
                             case 4: 
