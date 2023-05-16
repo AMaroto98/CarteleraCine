@@ -146,7 +146,7 @@ public class LecturaEscrituraStreams {
                 }
 
                 if (contadorAlmohadilla == 5 && letra != '#') {
-                    reparto += reparto;
+                    reparto += letra;
                 }
 
                 if (contadorAlmohadilla == 6 && letra != '{') {
@@ -256,7 +256,7 @@ public class LecturaEscrituraStreams {
 
     }
 
-    public static void leerLineaEscribirObj() {
+    public static void leerLineaEscribirObjeto() {
 
         try {
 
@@ -305,9 +305,77 @@ public class LecturaEscrituraStreams {
 
             RutaInvalida.imprimirErrorLogs(e);
         }
+    }
 
+    public static void leerObjEscribirObjeto() {
 
+        try {
 
+            FileInputStream entrada = new FileInputStream(Ruta.rutaEntrada());
+            ObjectInputStream objetoEntrada = new ObjectInputStream(entrada);
 
+            FileOutputStream salida = new FileOutputStream(Ruta.rutaSalida());
+            ObjectOutputStream objetoSalida = new ObjectOutputStream(salida);
+
+            boolean finArchivo = false;
+            while (!finArchivo) {
+                try {
+                    
+                    // Leer el objeto del archivo de entrada
+                    Object objeto = objetoEntrada.readObject();
+    
+                    // Escribir el objeto en el archivo de salida
+                    objetoSalida.writeObject(objeto);
+
+                } catch (EOFException e) {
+                    // Se alcanzó el final del archivo de entrada
+                    finArchivo = true;
+                }
+            }
+
+            // Cerrar el archivo de entrada
+            objetoEntrada.close();
+            entrada.close();
+            // Cerrar el archivo de salida
+            objetoSalida.close();
+            salida.close();
+
+        } catch (Exception e) {
+
+            RutaInvalida.imprimirErrorLogs(e);
+        }
+    }
+
+    public static void leerObjetoEscribirConsola() {
+
+        try {
+
+            FileInputStream entrada = new FileInputStream(Ruta.rutaEntrada());
+            ObjectInputStream objetoEntrada = new ObjectInputStream(entrada);
+
+            boolean finArchivo = false;
+
+            while (!finArchivo) {
+
+                try {
+                    // Casting y lectura del objeto
+                    Pelicula pelicula = (Pelicula) objetoEntrada.readObject();
+                    System.out.println(pelicula.toString());
+
+                } catch (EOFException e) {
+                    
+                    finArchivo = true;
+                    RutaInvalida.imprimirErrorLogs(e);
+                }
+        }
+
+            objetoEntrada.close();
+            entrada.close();
+            Sleep.pause(15000);
+
+        } catch (IOException | ClassNotFoundException e) {
+
+            RutaInvalida.imprimirErrorLogs(e);
+        }
     }
 }
