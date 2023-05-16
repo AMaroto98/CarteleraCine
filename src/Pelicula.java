@@ -1,4 +1,6 @@
-public class Pelicula {
+import java.io.Serializable;
+
+public class Pelicula implements Serializable {
 
     private String titulo;
     private String año;
@@ -79,7 +81,13 @@ public class Pelicula {
 
     @Override
     public String toString() {
-        return "Pelicula Titulo: " + titulo + ", Año: " + año + ", Director: " + director + ", Duración:" + duracion
-                + ", Sinopsis: " + sinopsis + ", Reparto: " + reparto + ", Sesión: " + sesion;
+        return 
+                "----- " + titulo + " -----" + "\n" + "\n" +
+                "Año: " + año + "\n" + "\n" +
+                "Director: " + director + "\n" + "\n" +
+                "Duración: " + duracion + " minutos" + "\n" + "\n" + 
+                "Sinopsis: " + sinopsis + "\n" + "\n" + 
+                "Reparto: " + reparto + "\n" + "\n" +
+                "Sesión: " + sesion + " horas" + "\n" + "\n";
     }
 }
